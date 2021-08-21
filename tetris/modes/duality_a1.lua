@@ -8,8 +8,8 @@ DualityA1Game.name = "Duality A1"
 DualityA1Game.hash = "DualityA1"
 DualityA1Game.tagline = "Control two boards at once!"
 
-function DualityA1Game:new()
-    DualityA1Game.super:new()
+function DualityA1Game:new(c)
+    DualityA1Game.super:new(c)
     self.randomizer = SplitHistoryRandomizer()
     self.other_grid = Grid(10, 24)
     self.next_queue_length = 2

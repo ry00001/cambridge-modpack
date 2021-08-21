@@ -159,10 +159,11 @@ function MarathonC99Game:advanceOneFrame(inputs, ruleset)
         self.frames = self.frames + 1
     end
     if self.piece ~= nil then
+        local lo = self.piece.last_orientation or self.piece.rotation
         if not (
-            self.piece.rotation - self.piece.last_orientation == -1 or -- 3 >> 2, 2 >> 1, 1 >> 0
-            self.piece.rotation - self.piece.last_orientation == 3 or -- 0 >> 3
-            self.piece.rotation - self.piece.last_orientation == 0 -- not rotated
+            self.piece.rotation - lo == -1 or -- 3 >> 2, 2 >> 1, 1 >> 0
+            self.piece.rotation - lo == 3 or -- 0 >> 3
+            self.piece.rotation - lo == 0 -- not rotated
         ) then
             self.ccw_bonus = 0
         end
