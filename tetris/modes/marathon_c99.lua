@@ -47,8 +47,10 @@ local slots_table = {
 local slot_popup = {["text"]="",["time"]=0,["slotnum"]=0}
 local line_popup = {["y"]=0,["score"]=0,["lines"]=0}
 
-function MarathonC99Game:new(cfg)
-    self.super:new(cfg)
+function MarathonC99Game:new(_, cfg)
+    if cfg == nil then cfg = {} end -- Don't break older Cambridge versions
+
+    self.super:new(_, cfg)
     self.grid = Grid(10, 22)
 
     self.additive_gravity = false
