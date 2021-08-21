@@ -47,8 +47,8 @@ local slots_table = {
 local slot_popup = {["text"]="",["time"]=0,["slotnum"]=0}
 local line_popup = {["y"]=0,["score"]=0,["lines"]=0}
 
-function MarathonC99Game:new()
-    self.super:new()
+function MarathonC99Game:new(cfg)
+    self.super:new(cfg)
     self.grid = Grid(10, 22)
 
     self.additive_gravity = false
@@ -58,10 +58,11 @@ function MarathonC99Game:new()
     self.tetris_slots = 0
     self.ccw_bonus = 10 ^ 7
 	slot_popup = {["text"]="",["time"]=0}
-    self.irs = false
-    self.enable_hard_drop = false
+    self.irs = cfg.irs == 2
+    self.enable_hard_drop = cfg.hardDrop == 2
     self.lock_drop = false
-    self.next_queue_length = 1
+    self.next_queue_length = cfg.nextQueue == 2 and 3 or 1
+    self.enable_hold = cfg.hold == 2
 end
 
 function MarathonC99Game:getARE()
@@ -262,6 +263,9 @@ function MarathonC99Game:drawGrid()
 		love.graphics.printf(line_popup.score,40,line_popup.y-1,200,"center")
 	end
     self.grid:draw()
+    if self.piece ~= nil and self.config.ghostPiece == 2 then
+		self:drawGhostPiece(ruleset)
+	end
 end
 
 function MarathonC99Game:drawScoringInfo()
@@ -356,6 +360,16 @@ function MarathonC99Game:getHighscoreData()
         lines = self.lines,
         level = self.level,
         frames = self.frames,
+    }
+end
+
+function MarathonC99Game:provideSettings()
+    return {
+        {"hardDrop", "Hard Drop", {"Off", "On"}},
+        {"irs", "IRS", {"Off", "On"}},
+        {"nextQueue", "Next pieces", {"One", "Three"}},
+        {"hold", "Hold", {"Off", "On"}},
+        {"ghostPiece", "Ghost piece", {"Off", "On"}}
     }
 end
 
