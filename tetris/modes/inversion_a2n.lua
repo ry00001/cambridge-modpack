@@ -7,7 +7,7 @@ InversionGame.hash = "InversionA2N"
 InversionGame.tagline = "What if the active piece was invisible?"
 
 function InversionGame:new(_, c)
-    SurvivalA2Game:new(_, c)
+    SurvivalA2Game:new(_,c)
     self.piece_active_time = 0
 end
 

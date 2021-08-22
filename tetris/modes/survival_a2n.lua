@@ -6,8 +6,8 @@ SurvivalA2NGame.name = "Survival A2N"
 SurvivalA2NGame.hash = "SurvivalA2N"
 SurvivalA2NGame.tagline = "A variation of Survival A2 for Carnival of Derp."
 
-function SurvivalA2NGame:new()
-    self.super:new()
+function SurvivalA2NGame:new(_, c)
+    self.super:new(_, c)
     self.next_queue_length = 3
     self.enable_hold = true
 end
